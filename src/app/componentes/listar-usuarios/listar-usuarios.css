@@ -1,0 +1,9 @@
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: #0d6efd;
+  color: white;
+}

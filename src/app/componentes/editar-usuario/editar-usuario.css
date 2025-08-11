@@ -1,0 +1,18 @@
+.card {
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+form label {
+  font-weight: 500;
+}
+
+form input, form select {
+  font-size: 0.9rem;
+  padding: 6px 10px;
+}
+
+form input[placeholder] {
+  font-style: italic;
+  color: #6c757d;
+}

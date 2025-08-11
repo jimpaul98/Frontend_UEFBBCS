@@ -1,0 +1,150 @@
+<div class="sidebar bg-dark text-white d-flex flex-column"
+     [class.collapsed]="isCollapsed">
+  
+  <!-- Encabezado -->
+  <div class="sidebar-header d-flex align-items-center justify-content-between p-3 border-bottom">
+    <div class="d-flex align-items-center">
+      <img src="assets/logo.png" alt="Logo"
+           height="40" class="me-2 rounded-circle bg-white p-1">
+      <span class="fw-bold fs-5 sidebar-text" *ngIf="!isCollapsed">Institución</span>
+    </div>
+    <button class="btn btn-sm btn-outline-light"
+            (click)="toggleSidebar()">
+      <i class="bi"
+         [ngClass]="isCollapsed ? 'bi-chevron-double-right' : 'bi-chevron-double-left'"></i>
+    </button>
+  </div>
+
+  <!-- Menú principal -->
+  <ul class="nav nav-pills flex-column mb-auto mt-3">
+    <li class="nav-item mb-2">
+      <a routerLink="/dashboard" routerLinkActive="active"
+         class="nav-link text-white d-flex align-items-center">
+        <i class="bi bi-speedometer2 me-2"></i>
+        <span *ngIf="!isCollapsed">Dashboard</span>
+      </a>
+    </li>
+
+
+     <!-- Usuarios -->
+    <li class="nav-item mb-2">
+      <a (click)="toggleMenu('usuarios')"
+         class="nav-link text-white d-flex align-items-center justify-content-between">
+        <span><i class="bi bi-people-fill me-2"></i>
+        <span class="sidebar-text" *ngIf="!isCollapsed">Usuarios</span></span>
+        <i *ngIf="!isCollapsed" class="bi"
+           [ngClass]="activeMenu === 'usuarios' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </a>
+      <ul *ngIf="activeMenu === 'usuarios' && !isCollapsed"
+          class="nav flex-column ms-3 mt-1">
+        <li class="nav-item">
+          <a routerLink="/usuarios/crear" class="nav-link text-white">
+            <i class="bi bi-person-plus me-2"></i>
+            <span class="sidebar-text">Registrar</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/usuarios" class="nav-link text-white">
+            <i class="bi bi-list-ul me-2"></i>
+            <span class="sidebar-text">Ver Listado</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/usuarios/buscar" class="nav-link text-white">
+            <i class="bi bi-search me-2"></i>
+            <span class="sidebar-text">Buscar Usuario</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Estudiantes -->
+    <li class="nav-item mb-2">
+      <a (click)="toggleMenu('estudiantes')"
+         class="nav-link text-white d-flex align-items-center justify-content-between">
+        <span><i class="fa-solid fa-user-graduate me-2"></i>
+        <span class="sidebar-text" *ngIf="!isCollapsed">Estudiantes</span></span>
+        <i *ngIf="!isCollapsed" class="bi"
+           [ngClass]="activeMenu === 'estudiantes' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </a>
+      <ul *ngIf="activeMenu === 'estudiantes' && !isCollapsed"
+          class="nav flex-column ms-3 mt-1">
+        <li class="nav-item">
+          <a routerLink="/estudiantes/registrar" class="nav-link text-white">
+            <i class="bi bi-person-plus me-2"></i>
+            <span class="sidebar-text">Registrar</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/estudiantes/listado" class="nav-link text-white">
+            <i class="bi bi-list-ul me-2"></i>
+            <span class="sidebar-text">Ver Listado</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/estudiantes/buscar" class="nav-link text-white">
+            <i class="bi bi-search me-2"></i>
+            <span class="sidebar-text">Buscar Estudiante</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Profesores -->
+    <li class="nav-item mb-2">
+      <a (click)="toggleMenu('profesores')"
+         class="nav-link text-white d-flex align-items-center justify-content-between">
+        <span><i class="fas fa-chalkboard-teacher me-2"></i>
+        <span class="sidebar-text" *ngIf="!isCollapsed">Profesores</span></span>
+        <i *ngIf="!isCollapsed" class="bi"
+           [ngClass]="activeMenu === 'profesores' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </a>
+      <ul *ngIf="activeMenu === 'profesores' && !isCollapsed"
+          class="nav flex-column ms-3 mt-1">
+        <li class="nav-item">
+          <a routerLink="/profesores/registrar" class="nav-link text-white">
+            <i class="bi bi-person-plus me-2"></i>
+            <span class="sidebar-text">Registrar</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/profesores/listado" class="nav-link text-white">
+            <i class="bi bi-list-ul me-2"></i>
+            <span class="sidebar-text">Ver Listado</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Cursos y Asignaturas -->
+    <li class="nav-item mb-2">
+      <a (click)="toggleMenu('cursos')"
+         class="nav-link text-white d-flex align-items-center justify-content-between">
+        <span><i class="bi bi-book-fill me-2"></i>
+        <span class="sidebar-text" *ngIf="!isCollapsed">Cursos y Asignaturas</span></span>
+        <i *ngIf="!isCollapsed" class="bi"
+           [ngClass]="activeMenu === 'cursos' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </a>
+      <ul *ngIf="activeMenu === 'cursos' && !isCollapsed"
+          class="nav flex-column ms-3 mt-1">
+        <li class="nav-item">
+          <a routerLink="/cursos/gestionar" class="nav-link text-white">
+            <i class="bi bi-collection me-2"></i>
+            <span class="sidebar-text">Gestionar Cursos</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/asignaturas/gestionar" class="nav-link text-white">
+            <i class="bi bi-journal-text me-2"></i>
+            <span class="sidebar-text">Gestionar Asignaturas</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- Footer -->
+  <div class="mt-auto p-3 border-top">
+    <small class="text-muted sidebar-text" *ngIf="!isCollapsed">© 2025 Institución</small>
+  </div>
+</div>

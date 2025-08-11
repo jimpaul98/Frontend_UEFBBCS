@@ -1,0 +1,27 @@
+.container-fluid {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+form label {
+  font-weight: 600;
+}
+
+button {
+  letter-spacing: .3px;
+}
+
+.row.shadow-lg {
+  background: #fff;
+  border-radius: 1rem;
+}
+
+
+a.small {
+  color: #0d6efd;
+}
+a.small:hover {
+  text-decoration: underline;
+}
+.modal-content {
+  border-radius: 1rem;
+}
