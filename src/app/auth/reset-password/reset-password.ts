@@ -3,7 +3,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../servicios/auth';// ajusta la ruta real
+import { AuthService } from '../../servicios/auth.service';// ajusta la ruta real
 
 @Component({
   standalone: true,

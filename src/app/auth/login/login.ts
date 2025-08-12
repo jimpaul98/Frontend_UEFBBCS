@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../servicios/auth';
+import { AuthService } from '../../servicios/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

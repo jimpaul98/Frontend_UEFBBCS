@@ -3,7 +3,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../servicios/auth';
+import { AuthService } from '../../servicios/auth.service';
 
 @Component({
   standalone: true,
