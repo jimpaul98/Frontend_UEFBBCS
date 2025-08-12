@@ -3,30 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Estudiante {
-  id: string;
+  _id: string;  // Identificador del estudiante
   nombre: string;
   apellido: string;
-  fechaNacimiento: string;
-  direccion: string;
   telefono: string;
   email: string;
+  direccion: string;
+  fechaNacimiento: string;
   id_clase: string;
   padre: {
     nombre: string;
     telefono: string;
     email: string;
   };
-  calificaciones: Array<{
-    id_materia: string;
-    calificacion: number;
-    fecha: string;
-  }>;
-  asistencia: Array<{
-    id_clase: string;
-    fecha: string;
-    asistio: boolean;
-  }>;
 }
+
 
 @Injectable({ providedIn: 'root' })
 export class EstudiantesService {

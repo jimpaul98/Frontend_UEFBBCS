@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold">Lista de Profesores</h4>
+    <button class="btn btn-success" (click)="agregarProfesor()">
+      <i class="bi bi-plus-circle me-1"></i> Agregar Profesor
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+          <th>Especialidad</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profesor of profesores">
+          <td>{{ profesor.nombre }}</td>
+          <td>{{ profesor.apellido }}</td>
+          <td>{{ profesor.telefono }}</td>
+          <td>{{ profesor.email }}</td>
+          <td>{{ profesor.especialidad }}</td>
+          <td class="text-center">
+            <button class="btn btn-primary btn-sm me-2" (click)="editarProfesor(profesor.id)">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="eliminarProfesor(profesor.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

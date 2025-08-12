@@ -1,39 +1,20 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface Profesor {
-  id: string;
-  nombre: string;
-  apellido: string;
-  telefono: string;
-  email: string;
-  especialidad: string;
-  materias: string[];  // Array de IDs de las materias que enseña
-}
+import { Profesor } from '../models/profesor.model'; // Importa el modelo de Profesor
 
 @Injectable({ providedIn: 'root' })
 export class ProfesoresService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api'; // Ajusta tu URL
+  private apiUrl = 'http://localhost:3000/api';  // Ajusta la URL según sea necesario
 
+  // Obtener la lista de todos los profesores
   obtenerProfesores(): Observable<Profesor[]> {
     return this.http.get<Profesor[]>(`${this.apiUrl}/profesores`);
   }
 
-  registrarProfesor(profesor: any) {
-    return this.http.post(`${this.apiUrl}/profesores`, profesor);
-  }
-
-  eliminarProfesor(id: string) {
-    return this.http.delete(`${this.apiUrl}/profesores/${id}`);
-  }
-
-  obtenerProfesorPorId(id: string) {
-    return this.http.get(`${this.apiUrl}/profesores/${id}`);
-  }
-
-  actualizarProfesor(id: string, profesor: any) {
-    return this.http.put(`${this.apiUrl}/profesores/${id}`, profesor);
+  // Registrar un nuevo profesor
+  registrarProfesor(profesor: Profesor): Observable<Profesor> {
+    return this.http.post<Profesor>(`${this.apiUrl}/profesores`, profesor);
   }
 }

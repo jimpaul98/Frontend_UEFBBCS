@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Clase {
-  id: string;
+  _id: string;
   grado: string;
   seccion: string;
-  id_profesor: string; // ID del profesor encargado de la clase
-  estudiantes: string[]; // Array de IDs de estudiantes
+  id_profesor: string;
+  estudiantes: string[];  // IDs de los estudiantes
 }
 
 @Injectable({ providedIn: 'root' })
@@ -15,23 +15,28 @@ export class ClasesService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/api'; // Ajusta tu URL
 
+  // Obtener todas las clases
   obtenerClases(): Observable<Clase[]> {
     return this.http.get<Clase[]>(`${this.apiUrl}/clases`);
   }
 
-  registrarClase(clase: any) {
-    return this.http.post(`${this.apiUrl}/clases`, clase);
+  // Registrar una nueva clase
+  registrarClase(clase: Clase): Observable<Clase> {
+    return this.http.post<Clase>(`${this.apiUrl}/clases`, clase);
   }
 
-  eliminarClase(id: string) {
-    return this.http.delete(`${this.apiUrl}/clases/${id}`);
+  // Eliminar una clase por su ID
+  eliminarClase(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/clases/${id}`);
   }
 
-  obtenerClasePorId(id: string) {
-    return this.http.get(`${this.apiUrl}/clases/${id}`);
+  // Obtener una clase por su ID
+  obtenerClasePorId(id: string): Observable<Clase> {
+    return this.http.get<Clase>(`${this.apiUrl}/clases/${id}`);
   }
 
-  actualizarClase(id: string, clase: any) {
-    return this.http.put(`${this.apiUrl}/clases/${id}`, clase);
+  // Actualizar una clase por su ID
+  actualizarClase(id: string, clase: Clase): Observable<Clase> {
+    return this.http.put<Clase>(`${this.apiUrl}/clases/${id}`, clase);
   }
 }

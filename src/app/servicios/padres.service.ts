@@ -15,7 +15,24 @@ export class PadresService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/api'; // Ajusta tu URL
 
+  // Obtener todos los padres
+  obtenerPadres(): Observable<Padre[]> {
+    return this.http.get<Padre[]>(`${this.apiUrl}/padres`);
+  }
+
   registrarPadre(padre: any) {
     return this.http.post(`${this.apiUrl}/padres`, padre);
+  }
+
+  eliminarPadre(id: string) {
+    return this.http.delete(`${this.apiUrl}/padres/${id}`);
+  }
+
+  obtenerPadrePorId(id: string) {
+    return this.http.get(`${this.apiUrl}/padres/${id}`);
+  }
+
+  actualizarPadre(id: string, padre: any) {
+    return this.http.put(`${this.apiUrl}/padres/${id}`, padre);
   }
 }

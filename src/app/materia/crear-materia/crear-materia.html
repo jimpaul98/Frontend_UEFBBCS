@@ -1,0 +1,31 @@
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="card shadow-sm p-4 w-100" style="max-width: 700px;">
+    <h4 class="fw-bold mb-4 text-center">Registrar Materia</h4>
+
+    <form #materiaForm="ngForm" (ngSubmit)="registrarMateria(materiaForm)">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" [(ngModel)]="materia.nombre" name="nombre" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Descripción</label>
+          <input type="text" class="form-control" [(ngModel)]="materia.descripcion" name="descripcion" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Profesor</label>
+          <select class="form-select" [(ngModel)]="materia.id_profesor" name="id_profesor" required>
+            <option value="">Seleccione un profesor</option>
+            <option *ngFor="let profesor of profesores" [value]="profesor._id">{{ profesor.nombre }} {{ profesor.apellido }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <button type="submit" class="btn btn-success">
+          <i class="bi bi-save me-1"></i> Guardar Materia
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
