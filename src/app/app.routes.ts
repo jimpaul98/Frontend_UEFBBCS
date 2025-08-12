@@ -58,6 +58,91 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./usuario/editar-usuario/editar-usuario').then(m => m.EditarUsuario),
       },
+
+      // Rutas para Estudiantes
+      {
+        path: 'estudiantes',
+        loadComponent: () =>
+          import('./estudiante/listar-estudiante/listar-estudiante').then(m => m.ListarEstudiantes),
+      },
+      {
+        path: 'estudiantes/crear',
+        loadComponent: () =>
+          import('./estudiante/crear-estudiante/crear-estudiante').then(m => m.CrearEstudianteComponent),
+      },
+      {
+        path: 'estudiantes/editar/:id',
+        loadComponent: () =>
+          import('./estudiante/editar-estudiante/editar-estudiante').then(m => m.EditarEstudiante),
+      },
+
+      // Rutas para Profesores
+      {
+        path: 'profesores',
+        loadComponent: () =>
+          import('./profesor/listar-profesores/listar-profesores').then(m => m.ListarProfesores),
+      },
+      {
+        path: 'profesores/crear',
+        loadComponent: () =>
+          import('./profesor/crear-profesor/crear-profesor').then(m => m.CrearProfesorComponent),
+      },
+      {
+        path: 'profesores/editar/:id',
+        loadComponent: () =>
+          import('./profesor/editar-profesor/editar-profesor').then(m => m.EditarProfesor),
+      },
+
+      // Rutas para Clases
+      {
+        path: 'clases',
+        loadComponent: () =>
+          import('./clase/listar-clases/listar-clases').then(m => m.ListarClases),
+      },
+      {
+        path: 'clases/crear',
+        loadComponent: () =>
+          import('./clase/crear-clase/crear-clase').then(m => m.CrearClaseComponent),
+      },
+      {
+        path: 'clases/editar/:id',
+        loadComponent: () =>
+          import('./clase/editar-clase/editar-clase').then(m => m.EditarClase),
+      },
+
+      // Rutas para Asistencia
+      {
+        path: 'asistencia',
+        loadComponent: () =>
+          import('./asistencia/listar-asistencias/listar-asistencias').then(m => m.ListarAsistenciasComponent),
+      },
+      {
+        path: 'asistencia/crear',
+        loadComponent: () =>
+          import('./asistencia/crear-asistencia/crear-asistencia').then(m => m.CrearAsistenciaComponent),
+      },
+      {
+        path: 'asistencia/editar/:id',
+        loadComponent: () =>
+          import('./asistencia/editar-asistencia/editar-asistencia').then(m => m.EditarAsistencia),
+      },
+
+      // Rutas para Padres
+      {
+        path: 'padres',
+        loadComponent: () =>
+          import('./padre/listar-padres/listar-padres').then(m => m.ListarPadres),
+      },
+      {
+        path: 'padres/crear',
+        loadComponent: () =>
+          import('./padre/crear-padre/crear-padre').then(m => m.CrearPadreComponent),
+      },
+      {
+        path: 'padres/editar/:id',
+        loadComponent: () =>
+          import('./padre/editar-padre/editar-padre').then(m => m.EditarPadre),
+      },
     ],
   },
 
