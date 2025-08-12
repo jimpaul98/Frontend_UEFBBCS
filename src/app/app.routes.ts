@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Login } from './componentes/login/login';
+import { Login } from './auth/login/login';
 import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
@@ -11,20 +11,20 @@ export const routes: Routes = [
       {
         path: 'forgot-password',
         loadComponent: () =>
-          import('./componentes/forgot-password/forgot-password')
+          import('./auth/forgot-password/forgot-password')
             .then(m => m.ForgotPassword),
       },
       // Soporta ?token=... y :token
       {
         path: 'reset-password',
         loadComponent: () =>
-          import('./componentes/reset-password/reset-password')
+          import('./auth/reset-password/reset-password')
             .then(m => m.ResetPassword),
       },
       {
         path: 'reset-password/:token',
         loadComponent: () =>
-          import('./componentes/reset-password/reset-password')
+          import('./auth/reset-password/reset-password')
             .then(m => m.ResetPassword),
       },
       { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -46,17 +46,17 @@ export const routes: Routes = [
       {
         path: 'usuarios',
         loadComponent: () =>
-          import('./componentes/listar-usuarios/listar-usuarios').then(m => m.ListarUsuarios),
+          import('./usuario/listar-usuarios/listar-usuarios').then(m => m.ListarUsuarios),
       },
       {
         path: 'usuarios/crear',
         loadComponent: () =>
-          import('./componentes/crear-usuario/crear-usuario').then(m => m.CrearUsuarioComponent),
+          import('./usuario/crear-usuario/crear-usuario').then(m => m.CrearUsuarioComponent),
       },
       {
         path: 'usuarios/editar/:id',
         loadComponent: () =>
-          import('./componentes/editar-usuario/editar-usuario').then(m => m.EditarUsuario),
+          import('./usuario/editar-usuario/editar-usuario').then(m => m.EditarUsuario),
       },
     ],
   },
