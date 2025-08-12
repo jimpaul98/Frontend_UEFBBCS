@@ -17,4 +17,10 @@ export class ProfesoresService {
   registrarProfesor(profesor: Profesor): Observable<Profesor> {
     return this.http.post<Profesor>(`${this.apiUrl}/profesores`, profesor);
   }
+
+  eliminarProfesor(id: string): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/profesores/${id}`);
+}
+
+
 }

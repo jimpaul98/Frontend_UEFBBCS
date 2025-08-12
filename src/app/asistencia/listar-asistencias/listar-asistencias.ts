@@ -1,21 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AsistenciaService } from '../../servicios/asistencia.service';  // Importa el servicio de Asistencia
+import { AsistenciaService } from '../../servicios/asistencia.service';
 import { ToastrService } from 'ngx-toastr';
-import { Asistencia } from '../../models/asistencia.model';  // Importa el modelo de Asistencia
+import { Asistencia } from '../../models/asistencia.model'; 
+import { CommonModule, NgFor } from '@angular/common'; 
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-asistencias',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NgFor],
   templateUrl: './listar-asistencias.html',
   styleUrls: ['./listar-asistencias.css']
 })
 export class ListarAsistenciasComponent implements OnInit {
   private asistenciaService = inject(AsistenciaService);
+   private router = inject(Router);
   private toastr = inject(ToastrService);
-  private router = inject(Router);
 
   asistencias: Asistencia[] = [];
 
@@ -25,11 +24,14 @@ export class ListarAsistenciasComponent implements OnInit {
 
   agregarAsistencia() {
     this.router.navigate(['/usuarios/crear']);
-  }
+  }  
 
   cargarAsistencias() {
     this.asistenciaService.obtenerAsistencias().subscribe({
-      next: (data) => this.asistencias = data,
+      next: (data) => {
+        // Asegúrate de que todas las asistencias tienen _id
+        this.asistencias = data;
+      },
       error: (err) => {
         console.error('Error al cargar asistencias', err);
         this.toastr.error('Error al cargar las asistencias');
@@ -37,16 +39,21 @@ export class ListarAsistenciasComponent implements OnInit {
     });
   }
 
-  editarAsistencia(id: string) {
-    // Lógica para editar asistencia
+  editarAsistencia(id: string | undefined) {
+  if (id) { // Verifica que id no sea undefined
+    // Lógica para editar la asistencia
+  } else {
+    console.error("ID no válido");
   }
+}
 
-  eliminarAsistencia(id: string) {
+eliminarAsistencia(id: string | undefined) {
+  if (id) { // Verifica que id no sea undefined
     if (confirm('¿Seguro que deseas eliminar esta asistencia?')) {
       this.asistenciaService.eliminarAsistencia(id).subscribe({
         next: () => {
           this.toastr.success('Asistencia eliminada con éxito');
-          this.cargarAsistencias(); // Refresca la lista de asistencias
+          this.cargarAsistencias();  // Refresca la lista de asistencias
         },
         error: (err) => {
           console.error('Error al eliminar la asistencia', err);
@@ -54,5 +61,9 @@ export class ListarAsistenciasComponent implements OnInit {
         }
       });
     }
+  } else {
+    console.error("ID no válido para eliminar");
   }
+}
+
 }

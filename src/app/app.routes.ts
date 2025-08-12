@@ -80,7 +80,7 @@ export const routes: Routes = [
       {
         path: 'profesores',
         loadComponent: () =>
-          import('./profesor/listar-profesores/listar-profesores').then(m => m.ListarProfesores),
+          import('./profesor/listar-profesores/listar-profesores').then(m => m.ListarProfesoresComponent),
       },
       {
         path: 'profesores/crear',

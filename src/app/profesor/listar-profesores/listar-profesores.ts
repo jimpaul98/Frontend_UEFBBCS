@@ -1,20 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { ProfesoresService, Profesor } from '../../servicios/profesores.service';
+import { ProfesoresService } from '../../servicios/profesores.service';
 import { ToastrService } from 'ngx-toastr';
+import { Profesor } from '../../models/profesor.model'; 
+import { Router } from '@angular/router'; // Importar el modelo correctamente
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-listar-profesores',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NgFor],
   templateUrl: './listar-profesores.html',
   styleUrls: ['./listar-profesores.css']
 })
-export class ListarProfesores implements OnInit {
+export class ListarProfesoresComponent implements OnInit {
   private profesoresService = inject(ProfesoresService);
   private router = inject(Router);
-  private toastr = inject(ToastrService); 
+  private toastr = inject(ToastrService);
 
   profesores: Profesor[] = [];
 
@@ -25,16 +25,19 @@ export class ListarProfesores implements OnInit {
   cargarProfesores() {
     this.profesoresService.obtenerProfesores().subscribe({
       next: (data) => this.profesores = data,
-      error: (err) => console.error('Error al cargar profesores:', err)
+      error: (err) => {
+        console.error('Error al cargar profesores', err);
+        this.toastr.error('Error al cargar los profesores');
+      }
     });
   }
 
   agregarProfesor() {
-    this.router.navigate(['/profesores/crear']);
+    this.router.navigate(['/usuarios/crear']);
   }
 
   editarProfesor(id: string) {
-    this.router.navigate([`/profesores/editar/${id}`]);
+    this.router.navigate([`/usuarios/editar/${id}`]);
   }
 
   eliminarProfesor(id: string) {
@@ -42,11 +45,11 @@ export class ListarProfesores implements OnInit {
       this.profesoresService.eliminarProfesor(id).subscribe({
         next: () => {
           this.toastr.success('Profesor eliminado con éxito');
-          this.cargarProfesores(); // Refresca la tabla
+          this.cargarProfesores(); // Refresca la lista de profesores
         },
         error: (err) => {
-          console.error('Error al eliminar profesor:', err);
-          this.toastr.error('Error al eliminar profesor');
+          console.error('Error al eliminar el profesor', err);
+          this.toastr.error('Error al eliminar el profesor');
         }
       });
     }
