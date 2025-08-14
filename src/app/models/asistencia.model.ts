@@ -4,4 +4,5 @@ export interface Asistencia {
   id_clase: string;
   fecha: string;
   asistio: boolean;
+  id_grado:string;
 }

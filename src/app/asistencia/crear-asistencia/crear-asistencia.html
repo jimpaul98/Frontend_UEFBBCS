@@ -1,33 +1,41 @@
-<div class="container mt-4 d-flex justify-content-center">
-  <div class="card shadow-sm p-4 w-100" style="max-width: 700px;">
+<div class="container mt-4">
+  <div class="card shadow-sm p-4">
     <h4 class="fw-bold mb-4 text-center">Registrar Asistencia</h4>
 
-    <form #asistenciaForm="ngForm" (ngSubmit)="registrar(asistenciaForm)">
+    <form #asistenciaForm="ngForm" (ngSubmit)="registrarAsistencia(asistenciaForm)">
       <div class="row g-3">
+        <!-- Selección de Estudiante -->
         <div class="col-md-6">
           <label class="form-label">Estudiante</label>
           <select class="form-select" [(ngModel)]="asistencia.id_estudiante" name="id_estudiante" required>
             <option value="">Seleccione un estudiante</option>
-            <!-- Usamos _id como identificador para el estudiante -->
-            <option *ngFor="let estudiante of estudiantes" [value]="estudiante._id">{{ estudiante.nombre }} {{ estudiante.apellido }}</option>
+            <option *ngFor="let estudiante of estudiantes" [value]="estudiante._id">
+              {{ estudiante.nombre }} {{ estudiante.apellido }}
+            </option>
           </select>
         </div>
+
+        <!-- Selección de Grado -->
         <div class="col-md-6">
-          <label class="form-label">Clase</label>
-          <select class="form-select" [(ngModel)]="asistencia.id_clase" name="id_clase" required>
-            <option value="">Seleccione una clase</option>
-            <!-- Usamos _id como identificador para la clase -->
-            <option *ngFor="let clase of clases" [value]="clase._id">{{ clase.grado }} - {{ clase.seccion }}</option>
+          <label class="form-label">Grado</label>
+          <select class="form-select" [(ngModel)]="asistencia.id_grado" name="id_grado" required>
+            <option value="">Seleccione un grado</option>
+            <option *ngFor="let grado of grados" [value]="grado._id">
+              {{ grado.nombre }} 
+            </option>
           </select>
         </div>
+
+        <!-- Fecha -->
         <div class="col-md-6">
           <label class="form-label">Fecha</label>
           <input type="date" class="form-control" [(ngModel)]="asistencia.fecha" name="fecha" required>
         </div>
+
+        <!-- Asistencia (Sí/No) -->
         <div class="col-md-6">
           <label class="form-label">Asistió</label>
           <select class="form-select" [(ngModel)]="asistencia.asistio" name="asistio" required>
-            <option value="">Seleccione</option>
             <option value="true">Sí</option>
             <option value="false">No</option>
           </select>

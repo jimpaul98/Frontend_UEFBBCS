@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { MateriasService, Materia } from '../../servicios/materia.service';
+import { MateriaService } from '../../servicios/materia.service';
 import { ToastrService } from 'ngx-toastr';
+import { Materia } from '../../models/materia.model';
 
 @Component({
   selector: 'app-listar-materias',
@@ -12,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./listar-materias.css']
 })
 export class ListarMaterias implements OnInit {
-  private materiasService = inject(MateriasService);
+  private materiasService = inject(MateriaService);
   private router = inject(Router);
   private toastr = inject(ToastrService); 
 

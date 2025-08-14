@@ -1,0 +1,64 @@
+/* General Card Styles */
+.card {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Center the form inside the card */
+.card .form-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.card .form-control {
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+.card .form-select {
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+.card .btn {
+  background-color: #28a745;  /* Green color for the button */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.card .btn:hover {
+  background-color: #218838;  /* Darker green on hover */
+}
+
+.card .form-select:focus,
+.card .form-control:focus {
+  border-color: #28a745;  /* Green focus for input fields */
+  box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);  /* Green glow */
+}
+
+/* Add margin to the top and bottom of the form */
+.container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .btn {
+    width: 100%;  /* Full-width button on small screens */
+  }
+}

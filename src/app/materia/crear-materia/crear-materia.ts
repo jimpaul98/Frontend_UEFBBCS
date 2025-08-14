@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MateriasService } from '../../servicios/materia.service';
+import { MateriaService } from '../../servicios/materia.service';
 import { ProfesoresService } from '../../servicios/profesores.service';
 import { ToastrService } from 'ngx-toastr';
 import { Materia } from '../../models/materia.model';
@@ -16,7 +16,7 @@ import { Profesor } from '../../models/profesor.model';
   styleUrls: ['./crear-materia.css']
 })
 export class CrearMateriaComponent implements OnInit {
-  private materiasService = inject(MateriasService);
+  private materiasService = inject(MateriaService);
   private profesoresService = inject(ProfesoresService);
   private router = inject(Router);
   private toastr = inject(ToastrService);

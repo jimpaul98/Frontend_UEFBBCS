@@ -2,12 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AsistenciaService } from '../../servicios/asistencia.service';
-import { EstudiantesService } from '../../servicios/estudiantes.service';
-import { ClasesService } from '../../servicios/clases.service';  // Importar el servicio de clases
+import { EstudiantesService } from '../../servicios/estudiantes.service';  // Servicio para estudiantes
+import { GradoService } from '../../servicios/grado.service';  // Servicio para obtener grados
+import { AsistenciaService } from '../../servicios/asistencia.service';  // Servicio para registrar asistencia
 import { ToastrService } from 'ngx-toastr';
-import { Estudiante } from '../../models/estudiante.model';  // Importar la interfaz de Estudiante
-import { Clase } from '../../models/anioLectivo.model';  // Importar la interfaz de Clase
+import { Estudiante } from '../../models/estudiante.model';  // Modelo de estudiante
+import { Grado } from '../../models/grado.models';  // Modelo de grado
+import { Asistencia } from '../../models/asistencia.model';  // Modelo de asistencia
 
 @Component({
   selector: 'app-crear-asistencia',
@@ -17,31 +18,34 @@ import { Clase } from '../../models/anioLectivo.model';  // Importar la interfaz
   styleUrls: ['./crear-asistencia.css']
 })
 export class CrearAsistenciaComponent implements OnInit {
-  private asistenciaService = inject(AsistenciaService);
   private estudiantesService = inject(EstudiantesService);
-  private clasesService = inject(ClasesService);  // Inyectar el servicio de clases
+  private gradoService = inject(GradoService);
+  private asistenciaService = inject(AsistenciaService);
   private router = inject(Router);
   private toastr = inject(ToastrService);
 
-  estudiantes: Estudiante[] = [];  // Lista de estudiantes
-  clases: Clase[] = [];  // Lista de clases
-
-  asistencia = {
+  asistencia: Asistencia = {
+    _id: '',
+    id_clase:'',
     id_estudiante: '',
-    id_clase: '',
+    id_grado: '',  // Ahora estamos utilizando id_grado
     fecha: '',
     asistio: false
   };
 
+  estudiantes: Estudiante[] = [];
+  grados: Grado[] = [];
+
   ngOnInit(): void {
     this.cargarEstudiantes();
-    this.cargarClases();
+    this.cargarGrados();
   }
 
-  // Método para cargar estudiantes
-  cargarEstudiantes() {
+  cargarEstudiantes(): void {
     this.estudiantesService.obtenerEstudiantes().subscribe({
-      next: (data) => this.estudiantes = data,
+      next: (data) => {
+        this.estudiantes = data;
+      },
       error: (err) => {
         console.error('Error al cargar los estudiantes', err);
         this.toastr.error('Error al cargar los estudiantes');
@@ -49,33 +53,33 @@ export class CrearAsistenciaComponent implements OnInit {
     });
   }
 
-  // Método para cargar clases
-  cargarClases() {
-    this.clasesService.obtenerClases().subscribe({
-      next: (data) => this.clases = data,
+  cargarGrados(): void {
+    this.gradoService.obtenerGrados().subscribe({
+      next: (data) => {
+        this.grados = data;
+      },
       error: (err) => {
-        console.error('Error al cargar las clases', err);
-        this.toastr.error('Error al cargar las clases');
+        console.error('Error al cargar los grados', err);
+        this.toastr.error('Error al cargar los grados');
       }
     });
   }
 
-  registrar(form: NgForm) {
+  registrarAsistencia(form: NgForm): void {
     if (form.invalid) {
-      this.toastr.error('Por favor completa todos los campos');
+      this.toastr.error('Por favor complete todos los campos');
       return;
     }
 
     this.asistenciaService.registrarAsistencia(this.asistencia).subscribe({
       next: () => {
         this.toastr.success('Asistencia registrada con éxito');
-        this.router.navigate(['/asistencia']);
+        this.router.navigate(['/asistencias']);
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error al registrar la asistencia', err);
         this.toastr.error('Error al registrar la asistencia');
       }
     });
   }
 }
-

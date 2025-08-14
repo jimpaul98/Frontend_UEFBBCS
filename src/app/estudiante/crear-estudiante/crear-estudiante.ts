@@ -2,11 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EstudiantesService } from '../../servicios/estudiantes.service';
-import { GradoService } from '../../servicios/grado.service'; // Corregido para usar GradoService
+import { EstudiantesService } from '../../servicios/estudiantes.service';  // Servicio para estudiantes
+import { GradoService } from '../../servicios/grado.service';  // Servicio para grados
 import { ToastrService } from 'ngx-toastr';
-import { Estudiante } from '../../models/estudiante.model';
-import { Grado } from '../../models/grado.models';  // Asegúrate de tener el modelo de Grado
+import { Estudiante } from '../../models/estudiante.model';  // Modelo de estudiante
+import { Grado } from '../../models/grado.models'; // Modelo de grado
 
 @Component({
   selector: 'app-crear-estudiante',
@@ -17,7 +17,7 @@ import { Grado } from '../../models/grado.models';  // Asegúrate de tener el mo
 })
 export class CrearEstudianteComponent implements OnInit {
   private estudiantesService = inject(EstudiantesService);
-  private gradoService = inject(GradoService);  // Corregido para usar GradoService
+  private gradoService = inject(GradoService);
   private router = inject(Router);
   private toastr = inject(ToastrService);
 
@@ -29,20 +29,22 @@ export class CrearEstudianteComponent implements OnInit {
     email: '',
     direccion: '',
     fechaNacimiento: '',
-    id_grado: '',  // Cambiado de id_clase a id_grado
+    id_grado: '',  // Ahora estamos usando id_grado
     padre: { nombre: '', telefono: '', email: '' }
   };
 
-  grados: Grado[] = [];  // Usamos Grado en lugar de Clase
+  gradosDisponibles: Grado[] = [];  // Lista para almacenar los grados disponibles
 
   ngOnInit(): void {
-    this.cargarGrados();
+    this.cargarGrados();  // Cargar los grados cuando el componente se inicie
   }
 
   // Método para cargar los grados disponibles
-  cargarGrados() {
+  cargarGrados(): void {
     this.gradoService.obtenerGrados().subscribe({
-      next: (data) => this.grados = data,
+      next: (data) => {
+        this.gradosDisponibles = data;  // Asigna los grados disponibles al array `gradosDisponibles`
+      },
       error: (err) => {
         console.error('Error al cargar los grados', err);
         this.toastr.error('Error al cargar los grados');
@@ -50,8 +52,8 @@ export class CrearEstudianteComponent implements OnInit {
     });
   }
 
-  // Método para registrar un estudiante
-  registrarEstudiante(form: NgForm) {
+  // Método para registrar el estudiante
+  registrarEstudiante(form: NgForm): void {
     if (form.invalid) {
       this.toastr.error('Por favor complete todos los campos');
       return;
@@ -60,10 +62,10 @@ export class CrearEstudianteComponent implements OnInit {
     this.estudiantesService.registrarEstudiante(this.estudiante).subscribe({
       next: () => {
         this.toastr.success('Estudiante registrado con éxito');
-        this.router.navigate(['/estudiantes']);
+        this.router.navigate(['/estudiantes']);  // Redirige a la lista de estudiantes
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error al registrar el estudiante', err);
         this.toastr.error('Error al registrar el estudiante');
       }
     });

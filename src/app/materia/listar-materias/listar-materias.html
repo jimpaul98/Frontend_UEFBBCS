@@ -22,10 +22,10 @@
           <td>{{ materia.descripcion }}</td>
           <td>{{ materia.id_profesor }}</td>
           <td class="text-center">
-            <button class="btn btn-primary btn-sm me-2" (click)="editarMateria(materia.id)">
+            <button class="btn btn-primary btn-sm me-2" (click)="editarMateria(materia._id)">
               <i class="bi bi-pencil"></i>
             </button>
-            <button class="btn btn-danger btn-sm" (click)="eliminarMateria(materia.id)">
+            <button class="btn btn-danger btn-sm" (click)="eliminarMateria(materia._id)">
               <i class="bi bi-trash"></i>
             </button>
           </td>

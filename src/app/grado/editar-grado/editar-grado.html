@@ -1,1 +1,73 @@
-<p>editar-grado works!</p>
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="card shadow-sm p-4 w-100" style="max-width: 700px;">
+    <h4 class="fw-bold mb-4 text-center">Editar Grado</h4>
+
+    <form #formulario="ngForm" (ngSubmit)="actualizarGrado(formulario)">
+      <div class="row g-3">
+        <!-- Campo para el nombre del Grado -->
+        <div class="col-12">
+          <label class="form-label">Nombre del Grado</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="grado.nombre"
+            name="nombre"
+            required
+            placeholder="Ej. 1ro A"
+          />
+        </div>
+
+        <!-- Selección de Profesor -->
+        <div class="col-12 mt-3">
+          <label class="form-label">Profesor</label>
+          <select
+            class="form-select"
+            [(ngModel)]="grado.profesor_id"
+            name="profesor_id"
+            required
+          >
+            <option *ngFor="let profesor of profesoresDisponibles" [value]="profesor._id">
+              {{ profesor.nombre }} {{ profesor.apellido }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Selección de Materias -->
+        <div class="col-12 mt-3">
+          <label class="form-label">Materias Asociadas</label>
+          <select
+            multiple
+            class="form-select"
+            [(ngModel)]="grado.materia_ids"
+            name="materia_ids"
+          >
+            <option *ngFor="let materia of materiasDisponibles" [value]="materia._id">
+              {{ materia.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Campo de Horarios -->
+        <div class="col-12 mt-3">
+          <label class="form-label">Horarios de Clase</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="grado.horario.lunes"
+            name="lunes"
+            placeholder="Lunes"
+          />
+          <!-- Puedes agregar más campos para los otros días -->
+        </div>
+
+        <!-- Botón para enviar el formulario -->
+        <div class="col-12 mt-3">
+          <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-save me-1"></i> Guardar Grado
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

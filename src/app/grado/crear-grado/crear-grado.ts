@@ -7,6 +7,8 @@ import { MateriaService } from '../../servicios/materia.service';  // Asegúrate
 import { ToastrService } from 'ngx-toastr';
 import { Grado } from '../../models/grado.models';
 import { Materia } from '../../models/materia.model';
+import { Profesor } from '../../models/profesor.model';
+import { ProfesoresService } from '../../servicios/profesores.service';  // Para cargar los profesores
 
 @Component({
   selector: 'app-crear-grado',
@@ -17,7 +19,8 @@ import { Materia } from '../../models/materia.model';
 })
 export class CrearGradoComponent implements OnInit {
   private gradoService = inject(GradoService);
-  private materiaService = inject(MateriaService);  // Para cargar las materias
+  private materiaService = inject(MateriaService);  
+  private profesorService = inject(ProfesoresService);  // Corregido el nombre del servicio
   private router = inject(Router);
   private toastr = inject(ToastrService);
 
@@ -39,9 +42,11 @@ export class CrearGradoComponent implements OnInit {
   };
 
   materiasDisponibles: Materia[] = [];  // Lista para almacenar las materias disponibles
+  profesoresDisponibles: Profesor[] = [];  // Lista para almacenar los profesores disponibles
 
   ngOnInit(): void {
     this.cargarMaterias();  // Cargar las materias cuando el componente se inicie
+    this.cargarProfesores();  // Cargar los profesores cuando el componente se inicie
   }
 
   // Método para cargar las materias disponibles
@@ -53,6 +58,19 @@ export class CrearGradoComponent implements OnInit {
       error: (err) => {
         console.error('Error al cargar las materias', err);
         this.toastr.error('Error al cargar las materias');
+      }
+    });
+  }
+
+  // Método para cargar los profesores disponibles
+  cargarProfesores(): void {
+    this.profesorService.obtenerProfesores().subscribe({
+      next: (data) => {
+        this.profesoresDisponibles = data;  // Asignar los datos de los profesores
+      },
+      error: (err) => {
+        console.error('Error al cargar los profesores', err);
+        this.toastr.error('Error al cargar los profesores');
       }
     });
   }

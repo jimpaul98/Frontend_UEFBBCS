@@ -16,3 +16,4 @@ export interface Horario {
   sabado: string;
   domingo: string;
 }
+

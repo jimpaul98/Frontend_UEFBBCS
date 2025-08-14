@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { EstudiantesService, Estudiante } from '../../servicios/estudiantes.service';
+import { EstudiantesService} from '../../servicios/estudiantes.service';
 import { ToastrService } from 'ngx-toastr';
+import { Estudiante } from '../../models/estudiante.model';
 
 @Component({
   selector: 'app-listar-estudiantes',

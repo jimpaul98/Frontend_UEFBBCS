@@ -2,7 +2,6 @@
   <div class="card shadow-sm p-4 w-100" style="max-width: 700px;">
     <h4 class="fw-bold mb-4 text-center">Registrar Grado</h4>
 
-    <!-- Formulario para registrar un nuevo Grado -->
     <form #formulario="ngForm" (ngSubmit)="registrarGrado(formulario)">
       <div class="row g-3">
         <!-- Campo para el nombre del Grado -->
@@ -18,9 +17,9 @@
           />
         </div>
 
-        <!-- Seleccionar profesor para el grado -->
+        <!-- Selección de Profesor -->
         <div class="col-12 mt-3">
-          <label class="form-label">Profesor Asignado</label>
+          <label class="form-label">Profesor</label>
           <select
             class="form-select"
             [(ngModel)]="grado.profesor_id"
@@ -33,7 +32,7 @@
           </select>
         </div>
 
-        <!-- Seleccionar las materias para el grado -->
+        <!-- Selección de Materias -->
         <div class="col-12 mt-3">
           <label class="form-label">Materias Asociadas</label>
           <select
@@ -41,7 +40,6 @@
             class="form-select"
             [(ngModel)]="grado.materia_ids"
             name="materia_ids"
-            required
           >
             <option *ngFor="let materia of materiasDisponibles" [value]="materia._id">
               {{ materia.nombre }}
@@ -49,33 +47,20 @@
           </select>
         </div>
 
-        <!-- Campo para el horario del grado -->
+        <!-- Campo de Horarios -->
         <div class="col-12 mt-3">
-          <label class="form-label">Horario del Grado</label>
-          <div class="row">
-            <div class="col-6">
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="grado.horario.lunes"
-                name="lunes"
-                placeholder="Lunes"
-              />
-            </div>
-            <div class="col-6">
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="grado.horario.martes"
-                name="martes"
-                placeholder="Martes"
-              />
-            </div>
-          </div>
-          <!-- Puedes agregar más días de la semana aquí si es necesario -->
+          <label class="form-label">Horarios de Clase</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="grado.horario.lunes"
+            name="lunes"
+            placeholder="Lunes"
+          />
+          <!-- Puedes agregar más campos para los otros días -->
         </div>
 
-        <!-- Botón para guardar el Grado -->
+        <!-- Botón para enviar el formulario -->
         <div class="col-12 mt-3">
           <button type="submit" class="btn btn-success w-100">
             <i class="bi bi-save me-1"></i> Guardar Grado
