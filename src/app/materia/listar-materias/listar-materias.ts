@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { MateriasService, Materia } from '../../servicios/materias.service';
+import { MateriasService, Materia } from '../../servicios/materia.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

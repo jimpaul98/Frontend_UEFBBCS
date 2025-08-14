@@ -93,23 +93,6 @@ export const routes: Routes = [
           import('./profesor/editar-profesor/editar-profesor').then(m => m.EditarProfesor),
       },
 
-      // Rutas para Clases
-      {
-        path: 'clases',
-        loadComponent: () =>
-          import('./clase/listar-clases/listar-clases').then(m => m.ListarClases),
-      },
-      {
-        path: 'clases/crear',
-        loadComponent: () =>
-          import('./clase/crear-clase/crear-clase').then(m => m.CrearClaseComponent),
-      },
-      {
-        path: 'clases/editar/:id',
-        loadComponent: () =>
-          import('./clase/editar-clase/editar-clase').then(m => m.EditarClase),
-      },
-
       // Rutas para Asistencia
       {
         path: 'asistencia',

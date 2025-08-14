@@ -1,6 +1,6 @@
 export interface Materia {
-  _id: string;          // Identificador único de la materia
-  nombre: string;       // Nombre de la materia
-  descripcion: string;  // Descripción de la materia
-  id_profesor: string;  // Relación con el profesor (ID del profesor)
+  _id: string;  // Cambia id a _id
+  nombre: string;
+  descripcion: string;
+  id_profesor: string; // ID del profesor que imparte la materia
 }

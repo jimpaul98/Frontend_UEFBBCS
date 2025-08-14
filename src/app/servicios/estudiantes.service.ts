@@ -1,46 +1,35 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface Estudiante {
-  _id: string;  // Identificador del estudiante
-  nombre: string;
-  apellido: string;
-  telefono: string;
-  email: string;
-  direccion: string;
-  fechaNacimiento: string;
-  id_clase: string;
-  padre: {
-    nombre: string;
-    telefono: string;
-    email: string;
-  };
-}
-
+import { Estudiante } from '../models/estudiante.model';  // Asegúrate de tener el modelo de Estudiante
 
 @Injectable({ providedIn: 'root' })
 export class EstudiantesService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/api'; // Ajusta tu URL
 
+  // Obtener todos los estudiantes
   obtenerEstudiantes(): Observable<Estudiante[]> {
     return this.http.get<Estudiante[]>(`${this.apiUrl}/estudiantes`);
   }
 
-  registrarEstudiante(estudiante: any) {
-    return this.http.post(`${this.apiUrl}/estudiantes`, estudiante);
+  // Registrar un nuevo estudiante
+  registrarEstudiante(estudiante: Estudiante): Observable<Estudiante> {
+    return this.http.post<Estudiante>(`${this.apiUrl}/estudiantes`, estudiante);
   }
 
-  eliminarEstudiante(id: string) {
-    return this.http.delete(`${this.apiUrl}/estudiantes/${id}`);
+  // Eliminar un estudiante por su ID
+  eliminarEstudiante(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/estudiantes/${id}`);
   }
 
-  obtenerEstudiantePorId(id: string) {
-    return this.http.get(`${this.apiUrl}/estudiantes/${id}`);
+  // Obtener un estudiante por su ID
+  obtenerEstudiantePorId(id: string): Observable<Estudiante> {
+    return this.http.get<Estudiante>(`${this.apiUrl}/estudiantes/${id}`);
   }
 
-  actualizarEstudiante(id: string, estudiante: any) {
-    return this.http.put(`${this.apiUrl}/estudiantes/${id}`, estudiante);
+  // Actualizar un estudiante por su ID
+  actualizarEstudiante(id: string, estudiante: Estudiante): Observable<Estudiante> {
+    return this.http.put<Estudiante>(`${this.apiUrl}/estudiantes/${id}`, estudiante);
   }
 }

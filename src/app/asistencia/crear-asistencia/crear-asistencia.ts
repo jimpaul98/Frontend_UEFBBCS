@@ -7,7 +7,7 @@ import { EstudiantesService } from '../../servicios/estudiantes.service';
 import { ClasesService } from '../../servicios/clases.service';  // Importar el servicio de clases
 import { ToastrService } from 'ngx-toastr';
 import { Estudiante } from '../../models/estudiante.model';  // Importar la interfaz de Estudiante
-import { Clase } from '../../models/clase.model';  // Importar la interfaz de Clase
+import { Clase } from '../../models/anioLectivo.model';  // Importar la interfaz de Clase
 
 @Component({
   selector: 'app-crear-asistencia',

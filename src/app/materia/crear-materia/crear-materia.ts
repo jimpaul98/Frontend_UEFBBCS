@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MateriasService } from '../../servicios/materias.service';
+import { MateriasService } from '../../servicios/materia.service';
 import { ProfesoresService } from '../../servicios/profesores.service';
 import { ToastrService } from 'ngx-toastr';
 import { Materia } from '../../models/materia.model';

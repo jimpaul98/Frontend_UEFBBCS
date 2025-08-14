@@ -1,0 +1,46 @@
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="card shadow-sm p-4 w-100" style="max-width: 700px;">
+    <h4 class="fw-bold mb-4 text-center">Registrar Año Lectivo</h4>
+
+    <!-- Formulario para registrar un nuevo Año Lectivo -->
+    <form #formulario="ngForm" (ngSubmit)="registrarAnioLectivo(formulario)">
+      <div class="row g-3">
+        <!-- Campo para el nombre del Año Lectivo -->
+        <div class="col-12">
+          <label class="form-label">Nombre del Año Lectivo</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="anioLectivo.nombre"
+            name="nombre"
+            required
+            placeholder="Ej. 2025-2026"
+          />
+        </div>
+
+        <!-- Campo para seleccionar los grados asociados -->
+        <div class="col-12 mt-3">
+          <label class="form-label">Grados Asociados</label>
+          <select
+            multiple
+            class="form-select"
+            [(ngModel)]="anioLectivo.grado_ids"
+            name="grado_ids"
+          >
+            <option *ngFor="let grado of gradosDisponibles" [value]="grado._id">
+              {{ grado.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Botón para guardar el Año Lectivo -->
+        <div class="col-12 mt-3">
+          <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-save me-1"></i> Guardar Año Lectivo
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

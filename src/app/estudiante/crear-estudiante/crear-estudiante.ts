@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EstudiantesService } from '../../servicios/estudiantes.service';
-import { ClasesService } from '../../servicios/clases.service';
+import { GradoService } from '../../servicios/grado.service'; // Corregido para usar GradoService
 import { ToastrService } from 'ngx-toastr';
 import { Estudiante } from '../../models/estudiante.model';
-import { Clase } from '../../models/clase.model';
+import { Grado } from '../../models/grado.models';  // Asegúrate de tener el modelo de Grado
 
 @Component({
   selector: 'app-crear-estudiante',
@@ -17,7 +17,7 @@ import { Clase } from '../../models/clase.model';
 })
 export class CrearEstudianteComponent implements OnInit {
   private estudiantesService = inject(EstudiantesService);
-  private clasesService = inject(ClasesService);
+  private gradoService = inject(GradoService);  // Corregido para usar GradoService
   private router = inject(Router);
   private toastr = inject(ToastrService);
 
@@ -29,26 +29,28 @@ export class CrearEstudianteComponent implements OnInit {
     email: '',
     direccion: '',
     fechaNacimiento: '',
-    id_clase: '',
+    id_grado: '',  // Cambiado de id_clase a id_grado
     padre: { nombre: '', telefono: '', email: '' }
   };
 
-  clases: Clase[] = [];
+  grados: Grado[] = [];  // Usamos Grado en lugar de Clase
 
   ngOnInit(): void {
-    this.cargarClases();
+    this.cargarGrados();
   }
 
-  cargarClases() {
-    this.clasesService.obtenerClases().subscribe({
-      next: (data) => this.clases = data,
+  // Método para cargar los grados disponibles
+  cargarGrados() {
+    this.gradoService.obtenerGrados().subscribe({
+      next: (data) => this.grados = data,
       error: (err) => {
-        console.error('Error al cargar clases', err);
-        this.toastr.error('Error al cargar las clases');
+        console.error('Error al cargar los grados', err);
+        this.toastr.error('Error al cargar los grados');
       }
     });
   }
 
+  // Método para registrar un estudiante
   registrarEstudiante(form: NgForm) {
     if (form.invalid) {
       this.toastr.error('Por favor complete todos los campos');

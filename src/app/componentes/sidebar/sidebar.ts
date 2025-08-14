@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +11,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./sidebar.css']
 })
 export class SidebarComponent {
+  private router = inject(Router);
   isCollapsed = false;
   activeMenu: string | null = null;
 
@@ -18,7 +20,14 @@ export class SidebarComponent {
   }
 
   toggleMenu(menu: string) {
-    this.activeMenu = this.activeMenu === menu ? null : menu;
+  this.activeMenu = this.activeMenu === menu ? null : menu;
+
+  /* Lógica de navegación
+  if (this.activeMenu === 'cursos') {
+    this.router.navigate(['/clases']);
   }
+
+  */
+}
 }
 
