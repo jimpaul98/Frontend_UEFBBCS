@@ -59,23 +59,14 @@ export const routes: Routes = [
           import('./usuario/editar-usuario/editar-usuario').then(m => m.EditarUsuario),
       },
 
-      // Rutas para Estudiantes
-      {
-        path: 'estudiantes',
+// rutas para grados
+ {
+        path: 'grados',
         loadComponent: () =>
-          import('./estudiante/listar-estudiante/listar-estudiante').then(m => m.ListarEstudiantes),
-      },
-      {
-        path: 'estudiantes/crear',
-        loadComponent: () =>
-          import('./estudiante/crear-estudiante/crear-estudiante').then(m => m.CrearEstudianteComponent),
-      },
-      {
-        path: 'estudiantes/editar/:id',
-        loadComponent: () =>
-          import('./estudiante/editar-estudiante/editar-estudiante').then(m => m.EditarEstudiante),
+          import('./grado/listar-grados/listar-grados').then(m => m.ListarGradosComponent),
       },
 
+      
       // Rutas para Profesores
       {
         path: 'profesores',
@@ -93,39 +84,8 @@ export const routes: Routes = [
           import('./profesor/editar-profesor/editar-profesor').then(m => m.EditarProfesor),
       },
 
-      // Rutas para Asistencia
-      {
-        path: 'asistencia',
-        loadComponent: () =>
-          import('./asistencia/listar-asistencias/listar-asistencias').then(m => m.ListarAsistenciasComponent),
-      },
-      {
-        path: 'asistencia/crear',
-        loadComponent: () =>
-          import('./asistencia/crear-asistencia/crear-asistencia').then(m => m.CrearAsistenciaComponent),
-      },
-      {
-        path: 'asistencia/editar/:id',
-        loadComponent: () =>
-          import('./asistencia/editar-asistencia/editar-asistencia').then(m => m.EditarAsistencia),
-      },
+      // Rutas para Asistencia      
 
-      // Rutas para Padres
-      {
-        path: 'padres',
-        loadComponent: () =>
-          import('./padre/listar-padres/listar-padres').then(m => m.ListarPadres),
-      },
-      {
-        path: 'padres/crear',
-        loadComponent: () =>
-          import('./padre/crear-padre/crear-padre').then(m => m.CrearPadreComponent),
-      },
-      {
-        path: 'padres/editar/:id',
-        loadComponent: () =>
-          import('./padre/editar-padre/editar-padre').then(m => m.EditarPadre),
-      },
     ],
   },
 

@@ -1,45 +1,72 @@
-<div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="fw-bold">Lista de Grados</h4>
-    <button class="btn btn-success" (click)="agregarGrado()">
-      <i class="bi bi-plus-circle me-1"></i> Agregar Grado
-    </button>
-  </div>
+<div class="grid">
+  <!-- Panel: Gestión de Grados -->
+  <section class="card">
+    <header class="card-header">
+      <h3>GESTIÓN DE GRADOS</h3>
 
-  <div class="table-responsive">
-    <table class="table table-striped table-hover align-middle">
-      <thead class="table-dark">
-        <tr>
-          <th>Nombre</th>
-          <th>Profesor</th>
-          <th>Materias</th>
-          <th class="text-center">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let grado of grados">
-          <td>{{ grado.nombre }}</td>
-          <td>
-            <!-- Usar el método obtenerProfesorNombre() para obtener el nombre del profesor -->
-            {{ obtenerProfesorNombre(grado.profesor_id) }}
-          </td>
-          <td>
-            <ul>
-              <li *ngFor="let materiaId of grado.materia_ids">
-                {{ obtenerMateriaNombre(materiaId) }}
-              </li>
-            </ul>
-          </td>
-          <td class="text-center">
-            <button class="btn btn-primary btn-sm me-2" (click)="editarGrado(grado._id)">
-              <i class="bi bi-pencil"></i>
-            </button>
-            <button class="btn btn-danger btn-sm" (click)="eliminarGrado(grado._id)">
-              <i class="bi bi-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <div class="header-actions">
+        <div class="search">
+          <input
+            type="text"
+            placeholder="Ingresar dato a buscar"
+            [(ngModel)]="search"
+          />
+          <button class="btn icon-btn" title="Buscar">🔎</button>
+        </div>
+
+        <button class="btn primary" (click)="onCrear()">
+          <span class="icon">➕</span> Nuevo Registro
+        </button>
+      </div>
+    </header>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:60px;">Id</th>
+            <th>Grado</th>
+            <th>Aula</th>
+            <th>Sección</th>
+            <th>Vacantes</th>
+            <th style="width:190px;">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let g of paged"
+            [class.selected]="selected?._id === g._id"
+            (click)="seleccionar(g)"
+          >
+            <td>{{ g._id }}</td>
+            <td>{{ g.nombre }}</td>
+            <td class="actions" (click)="$event.stopPropagation()">
+              <button class="btn icon" title="Asignar cursos" (click)="onAsignar(g)">➕</button>
+              <button class="btn icon" title="Ver" (click)="onVer(g)">👁️</button>
+              <button class="btn icon" title="Editar" (click)="onEditar(g)">✏️</button>
+              <button class="btn icon danger" title="Eliminar" (click)="onEliminar(g)">🗑️</button>
+            </td>
+          </tr>
+
+          <tr *ngIf="!paged?.length">
+            <td colspan="6" class="empty">Sin resultados…</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="card-footer">
+      <div class="meta">
+        Registros del {{ leftStart }} al {{ leftEnd }} total de {{ leftTotal }} registros
+        &nbsp;&nbsp; | &nbsp;&nbsp;
+        {{ selected ? '1 fila seleccionada' : '0 filas seleccionadas' }}
+      </div>
+
+      <div class="pagination">
+        <button class="btn" [disabled]="page===1" (click)="page = page - 1">Anterior</button>
+        <span class="page-indicator">{{ page }}</span>
+        <button class="btn" [disabled]="page===totalPages" (click)="page = page + 1">Siguiente</button>
+      </div>
+    </footer>
+  </section>
 </div>
