@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { CatalogService } from '../../servicios/catalog.service'; 
+import { AnioLectivo } from '../../models/anio-lectivo';
 
 @Component({
   selector: 'app-listar-anios-lectivos',
-  imports: [],
+  standalone: true,
+  imports: [NgFor, NgIf],
   templateUrl: './listar-anios-lectivos.html',
-  styleUrl: './listar-anios-lectivos.css'
+  styleUrls: ['./listar-anios-lectivos.css']
 })
-export class ListarAniosLectivos {
-
+export class AniosListComponent implements OnInit {
+  list: AnioLectivo[] = [];
+  constructor(private catalog: CatalogService) {}
+  ngOnInit(){ this.catalog.anios({limit:500}).subscribe(r => this.list = r.data); }
 }

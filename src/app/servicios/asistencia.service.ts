@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Asistencia } from '../models/asistencia.model';  // Importa el modelo correcto
+import { Asistencia } from '../models/asistencia';  // Importa el modelo correcto
 
 @Injectable({ providedIn: 'root' })
 export class AsistenciaService {

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Grado } from '../models/grado.models';  // Importa el modelo de Grado
+import { Grado } from '../models/grado';  // Importa el modelo de Grado
 
 @Injectable({ providedIn: 'root' })
 export class GradoService {

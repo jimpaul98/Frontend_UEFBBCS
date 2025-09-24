@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Materia } from '../models/materia.model';  // Asegúrate de tener la interfaz correcta importada
+import { Materia } from '../models/materia';  // Asegúrate de tener la interfaz correcta importada
 
 @Injectable({ providedIn: 'root' })
 export class MateriaService {
