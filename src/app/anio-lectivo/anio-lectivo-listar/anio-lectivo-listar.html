@@ -1,0 +1,80 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 m-0">Años lectivos</h2>
+    <a class="btn btn-primary" routerLink="/anios/crear">
+      <i class="bi bi-plus"></i> Nuevo
+    </a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form class="row g-2 mb-3" (submit)="$event.preventDefault(); cargar()">
+        <div class="col-sm-6 col-md-4">
+          <input
+            class="form-control"
+            [(ngModel)]="search"
+            name="search"
+            placeholder="Buscar por nombre..."
+          />
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-primary" (click)="cargar()">
+            Buscar
+          </button>
+        </div>
+      </form>
+
+      <div *ngIf="loading" class="text-center py-4">
+        <div class="spinner-border text-primary" role="status"></div>
+        <div class="small text-muted mt-2">Cargando...</div>
+      </div>
+
+      <div class="table-responsive" *ngIf="!loading">
+        <table class="table table-bordered table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Nombre</th>
+              <th>Fecha inicio</th>
+              <th>Fecha fin</th>
+              <th>Activo</th>
+              <th style="width: 180px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of list">
+              <td class="fw-semibold">{{ a.nombre }}</td>
+              <td>{{ a.fecha_inicio | date : "shortDate" }}</td>
+              <td>{{ a.fecha_fin | date : "shortDate" }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="a.activo ? 'bg-success' : 'bg-secondary'"
+                >
+                  {{ a.activo ? "Sí" : "No" }}
+                </span>
+              </td>
+
+              <td class="text-center">
+                <button
+                  class="btn btn-primary btn-sm me-2"
+                  [routerLink]="['/anios/editar', a._id]"
+                >
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="confirmarEliminar(a)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="!list?.length">
+              <td colspan="5" class="text-center text-muted">Sin datos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

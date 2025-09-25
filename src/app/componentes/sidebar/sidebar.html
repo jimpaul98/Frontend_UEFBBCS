@@ -80,15 +80,40 @@
             <i class="bi bi-list-ul me-2"></i>
             <span class="sidebar-text">Ver Listado</span>
           </a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/estudiantes/buscar" class="nav-link text-white">
-            <i class="bi bi-search me-2"></i>
-            <span class="sidebar-text">Buscar Estudiante</span>
-          </a>
-        </li>
+        </li>       
       </ul>
     </li>
+
+     <!-- Materias -->
+    <li class="nav-item mb-2">
+      <a (click)="toggleMenu('materias')"
+         class="nav-link text-white d-flex align-items-center justify-content-between">
+        <span><i class="bi bi-journal-text me-2"></i>
+        <span class="sidebar-text" *ngIf="!isCollapsed">Materias</span></span>
+        <i *ngIf="!isCollapsed" class="bi"
+           [ngClass]="activeMenu === 'materias' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </a>
+      <ul *ngIf="activeMenu === 'materias' && !isCollapsed"
+          class="nav flex-column ms-3 mt-1">
+        <li class="nav-item">
+          <a routerLink="/materia/crear" class="nav-link text-white">            
+            <i class="bi bi-journal-plus me-2"></i>
+            <span class="sidebar-text">Añadir</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/materia" class="nav-link text-white">
+            <i class="bi bi-list-ul me-2"></i>
+            <span class="sidebar-text">Ver Listado</span>
+          </a>
+        </li>       
+      </ul>
+    </li>
+
+
+
+
+
 
     <!-- Profesores -->
     <li class="nav-item mb-2">
@@ -135,7 +160,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/profesores/listado" class="nav-link text-white">
+          <a routerLink="/anios" class="nav-link text-white">
             <i class="bi bi-list-ul me-2"></i>
             <span class="sidebar-text">Ver Listado</span>
           </a>

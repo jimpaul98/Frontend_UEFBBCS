@@ -1,0 +1,51 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 m-0">Editar materia</h2>
+    <a class="btn btn-outline-secondary" [routerLink]="['/materias']">Volver</a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div *ngIf="loading" class="text-center py-4">
+        <div class="spinner-border text-primary" role="status"></div>
+        <div class="small text-muted mt-2">Cargando...</div>
+      </div>
+
+      <form *ngIf="!loading" [formGroup]="form" class="row g-3">
+
+        <div class="col-md-4">
+          <label class="form-label">Código</label>
+          <input class="form-control" formControlName="codigo">
+          <div class="invalid-feedback d-block" *ngIf="f['codigo'].touched && f['codigo'].invalid">
+            Ingrese un código (2–20 caracteres).
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <label class="form-label">Nombre</label>
+          <input class="form-control" formControlName="nombre">
+          <div class="invalid-feedback d-block" *ngIf="f['nombre'].touched && f['nombre'].invalid">
+            Ingrese un nombre válido (mínimo 3 caracteres).
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Área</label>
+          <input class="form-control" formControlName="area">
+          <div class="invalid-feedback d-block" *ngIf="f['area'].touched && f['area'].invalid">
+            Ingrese un área válida.
+          </div>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+          <a class="btn btn-secondary" [routerLink]="['/materias']">Cancelar</a>
+          <button type="button" class="btn btn-primary" (click)="guardar()" [disabled]="saving">
+            <span *ngIf="saving" class="spinner-border spinner-border-sm me-2"></span>
+            Guardar cambios
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

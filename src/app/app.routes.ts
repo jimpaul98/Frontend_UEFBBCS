@@ -11,24 +11,27 @@ export const routes: Routes = [
       {
         path: 'forgot-password',
         loadComponent: () =>
-          import('./auth/forgot-password/forgot-password')
-            .then(m => m.ForgotPassword),
+          import('./auth/forgot-password/forgot-password').then(
+            (m) => m.ForgotPassword
+          ),
       },
       // Soporta ?token=... y :token
       {
         path: 'reset-password',
         loadComponent: () =>
-          import('./auth/reset-password/reset-password')
-            .then(m => m.ResetPassword),
+          import('./auth/reset-password/reset-password').then(
+            (m) => m.ResetPassword
+          ),
       },
       {
         path: 'reset-password/:token',
         loadComponent: () =>
-          import('./auth/reset-password/reset-password')
-            .then(m => m.ResetPassword),
+          import('./auth/reset-password/reset-password').then(
+            (m) => m.ResetPassword
+          ),
       },
       { path: '', pathMatch: 'full', redirectTo: 'login' },
-    ]
+    ],
   },
 
   // PRIVADAS (con layout) — protegidas
@@ -36,55 +39,86 @@ export const routes: Routes = [
     path: '',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./componentes/layout/layout').then(m => m.LayoutComponent),
+      import('./componentes/layout/layout').then((m) => m.LayoutComponent),
     children: [
       {
         path: 'dashboard',
         loadComponent: () =>
-          import('./componentes/dashboard/dashboard').then(m => m.Dashboard),
+          import('./componentes/dashboard/dashboard').then((m) => m.Dashboard),
       },
       {
         path: 'usuarios',
         loadComponent: () =>
-          import('./usuario/listar-usuarios/listar-usuarios').then(m => m.ListarUsuarios),
+          import('./usuario/listar-usuarios/listar-usuarios').then(
+            (m) => m.ListarUsuarios
+          ),
       },
       {
         path: 'usuarios/crear',
         loadComponent: () =>
-          import('./usuario/crear-usuario/crear-usuario').then(m => m.CrearUsuarioComponent),
+          import('./usuario/crear-usuario/crear-usuario').then(
+            (m) => m.CrearUsuarioComponent
+          ),
       },
       {
         path: 'usuarios/editar/:id',
         loadComponent: () =>
-          import('./usuario/editar-usuario/editar-usuario').then(m => m.EditarUsuario),
+          import('./usuario/editar-usuario/editar-usuario').then(
+            (m) => m.EditarUsuario
+          ),
       },
 
-// rutas para grados
- {
-        path: 'grados',
+      // rutas para anioslectivos
+      {
+        path: 'anios',
         loadComponent: () =>
-          import('./grado/listar-grados/listar-grados').then(m => m.ListarGradosComponent),
+          import('./anio-lectivo/anio-lectivo-listar/anio-lectivo-listar').then(
+            (m) => m.AnioLectivoListarComponent
+          ),
+      },
+      {
+        path: 'anios/crear',
+        loadComponent: () =>
+          import('./anio-lectivo/anio-lectivo-crear/anio-lectivo-crear').then(
+            (m) => m.AnioLectivoCrearComponent
+          ),
       },
 
-      
-      // Rutas para Profesores
       {
-        path: 'profesores',
+        path: 'anios/editar/:id',
         loadComponent: () =>
-          import('./profesor/listar-profesores/listar-profesores').then(m => m.ListarProfesoresComponent),
-      },
-      {
-        path: 'profesores/crear',
-        loadComponent: () =>
-          import('./profesor/crear-profesor/crear-profesor').then(m => m.CrearProfesorComponent),
-      },
-      {
-        path: 'profesores/editar/:id',
-        loadComponent: () =>
-          import('./profesor/editar-profesor/editar-profesor').then(m => m.EditarProfesor),
+          import('./anio-lectivo/anio-lectivo-editar/anio-lectivo-editar').then(
+            (m) => m.AnioLectivoEditarComponent
+          ),
       },
 
-      // Rutas para Asistencia      
+      // rutas para materias
+      {
+        path: 'materia',
+        loadComponent: () =>
+          import('./materia/materia-listar/materia-listar').then(
+            (m) => m.MateriaListarComponent
+          ),
+      },
+      {
+        path: 'materia/crear',
+        loadComponent: () =>
+          import('./materia/materia-crear/materia-crear').then(
+            (m) => m.MateriaCrear
+          ),
+      },
+
+      {
+        path: 'materia/editar/:id',
+        loadComponent: () =>
+          import('./materia/materia-editar/materia-editar').then(
+            (m) => m.MateriaEditar
+          ),
+      },
+
+
+
+
 
     ],
   },

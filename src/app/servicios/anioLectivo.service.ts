@@ -1,40 +1,36 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { AnioLectivo } from '../models/anio-lectivo';
 import { Observable } from 'rxjs';
 
-export interface AnioLectivo {
-  _id: string;
-  nombre: string;  // Nombre del Año Lectivo (Ejemplo: "2025-2026")
-  grado_ids: string[];  // IDs de los grados asociados
-}
+const API_BASE = 'http://localhost:3000/api';
 
 @Injectable({ providedIn: 'root' })
 export class AnioLectivoService {
-  private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api';  // Ajusta tu URL
+  private base = `${API_BASE}/anios-lectivos`;
+  constructor(private http: HttpClient) {}
 
-  // Obtener todos los años lectivos
-  obtenerAnioLectivos(): Observable<AnioLectivo[]> {
-    return this.http.get<AnioLectivo[]>(`${this.apiUrl}/anio-lectivos`);
+  listar(params?: { page?: number; limit?: number; search?: string }): Observable<{data: AnioLectivo[], pagina?: number, total?: number}> {
+    let hp = new HttpParams();
+    if (params) Object.entries(params).forEach(([k,v])=>{
+      if (v !== undefined && v !== null && v !== '') hp = hp.set(k, String(v));
+    });
+    return this.http.get<{data: AnioLectivo[], pagina?: number, total?: number}>(this.base, { params: hp });
   }
 
-  // Obtener un año lectivo por su ID
-  obtenerAnioLectivoPorId(id: string): Observable<AnioLectivo> {
-    return this.http.get<AnioLectivo>(`${this.apiUrl}/anio-lectivos/${id}`);
+  obtener(id: string): Observable<AnioLectivo> {
+    return this.http.get<AnioLectivo>(`${this.base}/${id}`);
   }
 
-  // Registrar un nuevo año lectivo
-  registrarAnioLectivo(anioLectivo: AnioLectivo): Observable<AnioLectivo> {
-    return this.http.post<AnioLectivo>(`${this.apiUrl}/anio-lectivos`, anioLectivo);
+  crear(body: AnioLectivo): Observable<AnioLectivo> {
+    return this.http.post<AnioLectivo>(this.base, body);
   }
 
-  // Eliminar un año lectivo por su ID
-  eliminarAnioLectivo(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/anio-lectivos/${id}`);
+  actualizar(id: string, body: Partial<AnioLectivo>): Observable<AnioLectivo> {
+    return this.http.put<AnioLectivo>(`${this.base}/${id}`, body);
   }
 
-  // Actualizar un año lectivo por su ID
-  actualizarAnioLectivo(id: string, anioLectivo: AnioLectivo): Observable<AnioLectivo> {
-    return this.http.put<AnioLectivo>(`${this.apiUrl}/anio-lectivos/${id}`, anioLectivo);
+  eliminar(id: string): Observable<{ok: boolean}> {
+    return this.http.delete<{ok: boolean}>(`${this.base}/${id}`);
   }
 }
