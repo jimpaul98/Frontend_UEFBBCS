@@ -1,68 +1,32 @@
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="h4 m-0">Nueva matrícula</h2>
-    <a class="btn btn-outline-secondary" [routerLink]="['/matricula']">Volver</a>
+    <a class="btn btn-outline-secondary" [routerLink]="['/matriculas']">Volver</a>
   </div>
 
   <div class="card shadow-sm">
     <div class="card-body">
       <form [formGroup]="form" class="row g-3">
 
-        <div class="col-md-4">
-          <label class="form-label">Cédula</label>
-          <input type="text" class="form-control" formControlName="cedula" placeholder="Ej. 102030405">
-          <div class="invalid-feedback d-block" *ngIf="f['cedula'].touched && f['cedula'].invalid">
-            Ingrese la cédula (mín. 8).
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <label class="form-label">Nombres</label>
-          <input type="text" class="form-control" formControlName="nombres">
-          <div class="invalid-feedback d-block" *ngIf="f['nombres'].touched && f['nombres'].invalid">
-            Ingrese nombres.
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <label class="form-label">Apellidos</label>
-          <input type="text" class="form-control" formControlName="apellidos">
-          <div class="invalid-feedback d-block" *ngIf="f['apellidos'].touched && f['apellidos'].invalid">
-            Ingrese apellidos.
+        <div class="col-md-6">
+          <label class="form-label">Estudiante</label>
+          <select class="form-select" formControlName="estudianteId">
+            <option value="">Seleccione…</option>
+            <option *ngFor="let e of estudiantes" [value]="e._id">{{ e.etiqueta }}</option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="f['estudianteId'].touched && f['estudianteId'].invalid">
+            Seleccione un estudiante.
           </div>
         </div>
 
         <div class="col-md-6">
-          <label class="form-label">Correo</label>
-          <input type="email" class="form-control" formControlName="correo" placeholder="alguien@dominio.com">
-        </div>
-
-        <div class="col-md-6">
-          <label class="form-label">Teléfono</label>
-          <input type="text" class="form-control" formControlName="telefono" placeholder="099...">
-        </div>
-
-        <div class="col-md-4">
-          <label class="form-label">Curso</label>
-          <input type="text" class="form-control" formControlName="curso" placeholder="Ej. octavo">
-          <div class="invalid-feedback d-block" *ngIf="f['curso'].touched && f['curso'].invalid">
-            Ingrese el curso.
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <label class="form-label">Paralelo</label>
-          <input type="text" class="form-control" formControlName="paralelo" placeholder="Ej. A">
-          <div class="invalid-feedback d-block" *ngIf="f['paralelo'].touched && f['paralelo'].invalid">
-            Ingrese el paralelo.
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <label class="form-label">Año lectivo</label>
-          <input type="text" class="form-control" formControlName="anioLectivo" placeholder="Ej. 2025-2026">
-          <div class="invalid-feedback d-block" *ngIf="f['anioLectivo'].touched && f['anioLectivo'].invalid">
-            Ingrese el año lectivo.
+          <label class="form-label">Curso / Paralelo</label>
+          <select class="form-select" formControlName="cursoId">
+            <option value="">Seleccione…</option>
+            <option *ngFor="let c of cursos" [value]="c._id">{{ c.etiqueta }}</option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="f['cursoId'].touched && f['cursoId'].invalid">
+            Seleccione un curso.
           </div>
         </div>
 
@@ -82,7 +46,7 @@
         </div>
 
         <div class="col-12 d-flex gap-2">
-          <a class="btn btn-secondary" [routerLink]="['/matricula']">Cancelar</a>
+          <a class="btn btn-secondary" [routerLink]="['/matriculas']">Cancelar</a>
           <button type="button" class="btn btn-primary" (click)="guardar()" [disabled]="saving">
             <span *ngIf="saving" class="spinner-border spinner-border-sm me-2"></span>
             Guardar
@@ -93,4 +57,3 @@
     </div>
   </div>
 </div>
-

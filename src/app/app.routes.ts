@@ -203,7 +203,7 @@ export const routes: Routes = [
         path: 'matricula',        
         loadComponent: () =>
           import('./matriculas/matricula-listar/matricula-listar').then(
-            (m) => m.MatriculaListar
+            (m) => m.MatriculaListarComponent
           ),
       },
 
