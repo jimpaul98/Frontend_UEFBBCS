@@ -1,28 +1,24 @@
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="h4 m-0">Años lectivos</h2>
-    <a class="btn btn-primary" routerLink="/anios/crear">
+    <a class="btn btn-primary" [routerLink]="['/anios/crear']">
       <i class="bi bi-plus"></i> Nuevo
     </a>
   </div>
 
   <div class="card shadow-sm">
     <div class="card-body">
-      <form class="row g-2 mb-3" (submit)="$event.preventDefault(); cargar()">
+      <div class="row g-2 mb-3">
         <div class="col-sm-6 col-md-4">
           <input
             class="form-control"
             [(ngModel)]="search"
             name="search"
-            placeholder="Buscar por nombre..."
+            placeholder="Buscar por nombre…"
+            (ngModelChange)="onSearchChange($event)"
           />
         </div>
-        <div class="col-auto">
-          <button class="btn btn-outline-primary" (click)="cargar()">
-            Buscar
-          </button>
-        </div>
-      </form>
+      </div>
 
       <div *ngIf="loading" class="text-center py-4">
         <div class="spinner-border text-primary" role="status"></div>
@@ -70,7 +66,7 @@
               </td>
             </tr>
             <tr *ngIf="!list?.length">
-              <td colspan="5" class="text-center text-muted">Sin datos</td>
+              <td colspan="5" class="text-center text-muted">Sin resultados</td>
             </tr>
           </tbody>
         </table>

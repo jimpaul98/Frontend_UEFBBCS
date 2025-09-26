@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UsuariosService,Usuario } from '../../servicios/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-listar-usuarios',
   standalone: true,

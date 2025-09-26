@@ -1,8 +1,8 @@
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="h4 m-0">Materias</h2>
-    <a class="btn btn-primary" [routerLink]="['/materia/crear']">
-      <i class="bi bi-plus"></i> Nueva
+    <h2 class="h4 m-0">Profesores</h2>
+    <a class="btn btn-primary" [routerLink]="['/profesor/crear']">
+      <i class="bi bi-plus"></i> Nuevo
     </a>
   </div>
 
@@ -14,7 +14,7 @@
             class="form-control"
             [(ngModel)]="search"
             name="search"
-            placeholder="Buscar por nombre, código o área…"
+            placeholder="Buscar por nombres, apellidos, correo o teléfono…"
             (ngModelChange)="onSearchChange($event)"
           />
         </div>
@@ -29,35 +29,45 @@
         <table class="table table-bordered table-hover align-middle">
           <thead class="table-light">
             <tr>
-              <th style="width: 140px">Código</th>
-              <th>Nombre</th>
-              <th>Área</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Correo</th>
+              <th>Teléfono</th>
+              <th>Activo</th>
               <th style="width: 180px"></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let m of list">
-              <td class="fw-semibold">{{ m.codigo }}</td>
-              <td>{{ m.nombre }}</td>
-              <td>{{ m.area }}</td>
-
+            <tr *ngFor="let p of list">
+              <td class="fw-semibold">{{ p.nombres }}</td>
+              <td>{{ p.apellidos }}</td>
+              <td>{{ p.correo }}</td>
+              <td>{{ p.telefono }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="p.activo ? 'bg-success' : 'bg-secondary'"
+                >
+                  {{ p.activo ? "Sí" : "No" }}
+                </span>
+              </td>
               <td class="text-center">
                 <button
                   class="btn btn-primary btn-sm me-2"
-                  [routerLink]="['/materia/editar', m._id]"
+                  [routerLink]="['/profesor/editar', p._id]"
                 >
                   <i class="bi bi-pencil"></i>
                 </button>
                 <button
                   class="btn btn-danger btn-sm"
-                  (click)="confirmarEliminar(m)"
+                  (click)="confirmarEliminar(p)"
                 >
                   <i class="bi bi-trash"></i>
                 </button>
               </td>
             </tr>
             <tr *ngIf="!list?.length">
-              <td colspan="4" class="text-center text-muted">Sin resultados</td>
+              <td colspan="6" class="text-center text-muted">Sin resultados</td>
             </tr>
           </tbody>
         </table>

@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { MateriaService } from '../../servicios/materia.service';
-import { Materia } from '../../models/materia';
+import { ProfesorService } from '../../servicios/profesor.service';
+import { Profesor } from '../../models/profesor';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-materia-listar',
+  selector: 'app-profesor-listar',
   standalone: true,
-  imports: [NgFor, NgIf, FormsModule, RouterLink],
-  templateUrl: './materia-listar.html',
-  styleUrls: ['./materia-listar.css']
+  imports: [NgFor, NgIf, NgClass, FormsModule,RouterLink],
+  templateUrl: './profesor-listar.html',
+  styleUrls: ['./profesor-listar.css']
 })
-export class MateriaListarComponent implements OnInit {
+export class ProfesorListarComponent implements OnInit {
   loading = false;
   search = '';
 
-  private all: Materia[] = []; // todo lo traído del servidor
-  list: Materia[] = [];        // vista filtrada
+  private all: Profesor[] = []; // dataset completo desde el servidor
+  list: Profesor[] = [];        // vista filtrada
 
-  constructor(private svc: MateriaService) {}
+  constructor(private svc: ProfesorService) {}
 
   ngOnInit() { this.cargarDesdeServidor(); }
 
@@ -35,7 +36,6 @@ export class MateriaListarComponent implements OnInit {
     });
   }
 
-  // se llama cada vez que cambia el input
   onSearchChange(q: string) {
     this.search = q ?? '';
     this.aplicarFiltro(this.search);
@@ -44,16 +44,17 @@ export class MateriaListarComponent implements OnInit {
   private aplicarFiltro(q: string) {
     const term = (q || '').trim().toLowerCase();
     if (!term) { this.list = this.all.slice(); return; }
-    this.list = this.all.filter(m =>
-      (m.nombre || '').toLowerCase().includes(term) ||
-      (m.codigo || '').toLowerCase().includes(term) ||
-      (m.area   || '').toLowerCase().includes(term)
+    this.list = this.all.filter(p =>
+      (p.nombres   || '').toLowerCase().includes(term) ||
+      (p.apellidos || '').toLowerCase().includes(term) ||
+      (p.correo    || '').toLowerCase().includes(term) ||
+      (p.telefono  || '').toLowerCase().includes(term)
     );
   }
 
-  confirmarEliminar(item: Materia) {
+  confirmarEliminar(item: Profesor) {
     if (!item._id) return;
-    if (!confirm(`¿Eliminar la materia "${item.nombre}"?`)) return;
+    if (!confirm(`¿Eliminar al profesor "${item.apellidos} ${item.nombres}"?`)) return;
     this.svc.eliminar(item._id).subscribe({
       next: _ => this.cargarDesdeServidor(),
       error: err => alert(err?.error?.mensaje || 'Error al eliminar')

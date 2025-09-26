@@ -1,8 +1,14 @@
 export interface Curso {
-  _id: string;
-  nombre: string; grado?: string; paralelo?: string;
-  trimestre: number;
-  anioLectivoId: { _id: string; clave: string; nombre: string; activo: boolean } | string;
-  materiaId: { _id: string; nombre: string } | string;
-  profesorId: { _id: string; nombre: string } | string;
+  _id?: string;
+  nombre: string;
+  paralelo: string;
+  materiaId: string;
+  profesorId: string;
+  anioLectivoId?: string; 
+  activo: boolean;
+
+  // opcional si tu API “puebla” datos:
+  materiaNombre?: string;
+  profesorNombre?: string; // "Apellidos Nombres"
+  anioNombre?: string;
 }
